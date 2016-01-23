@@ -1,4 +1,4 @@
-package Controller;
+package com.ConcurrentDemo.Controller;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,10 +15,10 @@ public class ControllerTestDemo {
             resturant.startWork();
             Thread t = new Thread(factory);
             t.start();
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(5);
             resturant.endWork();
             System.exit(0);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

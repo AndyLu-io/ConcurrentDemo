@@ -1,4 +1,4 @@
-package Controller;
+package com.ConcurrentDemo.Controller;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,7 +24,7 @@ public class Resturant {
         this.seats = 10;
         this.ChiefNum = 2;
         this.BusBoyNum = 2;
-        seat = new Semaphore(seats, true);
+        seat = new Semaphore(seats, false);
     }
 
     public Resturant(int seats, int ChiefNum, int BusBoyNum) {

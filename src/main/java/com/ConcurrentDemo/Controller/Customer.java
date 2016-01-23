@@ -1,4 +1,4 @@
-package Controller;
+package com.ConcurrentDemo.Controller;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +22,8 @@ public class Customer implements Runnable {
     public Customer(int delayTime, Resturant resturant) {
         this.DishesNum = delayTime;
         this.resturant = resturant;
+//        System.err.println("Customer : id" + id + " come in");
+        //System.out.println(resturant.seat.availablePermits());
     }
 
     public int getId() {
@@ -48,13 +50,14 @@ public class Customer implements Runnable {
             System.exit(1);
         }
         map.put(dishName + " dishID=" + dishID, true);
-        System.out.println(map.toString());
+//        System.out.println(map.toString());
     }
 
     @Override
     public void run() {
         try {
-            resturant.seat.acquire();
+            resturant.seat.tryAcquire();
+            long start = System.currentTimeMillis();
             for (int i = 0; i < DishesNum; i++) {
                 Dishes d = new Dishes("Customer" + id + "'s dish", this);
                 resturant.beforeDishes.put(d);
@@ -65,11 +68,12 @@ public class Customer implements Runnable {
                 if (map.containsValue(false)) {
                     continue;
                 } else {
-                    System.out.println(map.toString());
+//                    System.out.println(map.toString());
                     break;
                 }
             }
-            System.out.println("Customer : id=" + id + " , DishesNum=" + DishesNum + " status=finish;");
+            long end = System.currentTimeMillis();
+            System.out.println("Customer : id=" + id + " , DishesNum=" + DishesNum + " , status=finish , useTime=" + (end - start));
             resturant.seat.release();
         } catch (InterruptedException e) {
             e.printStackTrace();

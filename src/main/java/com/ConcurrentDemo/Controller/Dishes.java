@@ -1,4 +1,4 @@
-package Controller;
+package com.ConcurrentDemo.Controller;
 
 /**
  * author   : qianweifeng
