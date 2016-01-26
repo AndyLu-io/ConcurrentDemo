@@ -34,6 +34,7 @@ public class DispatcherController implements Runnable {
         BusBoyNum = 2;
         ChiefNum2 = new AtomicInteger(ChiefNum);
         BusBoyNum2 = new AtomicInteger(ChiefNum);
+
         startWord();
     }
 
